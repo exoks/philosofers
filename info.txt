@@ -1,4 +1,0 @@
-0-> configure git
-1-> understand threads 
-2-> understand the subject and split the project into a small problems
-3-> lhard work (lkhedma lkhedma lkhedma)
