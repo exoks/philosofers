@@ -6,7 +6,7 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 15:13:34 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/03/03 20:23:58 by oezzaou          ###   ########.fr       */
+/*   Updated: 2023/03/05 12:09:16 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # include "philo.h"
@@ -18,7 +18,7 @@ int	main(int ac, char **av)
 
 	phs = get_philosofers(ac, av);
 	if (!phs)
-		return (printf("%s\n", USAGE), 1);
+		return (display_usage_menu(), EXIT_FAILURE);
 	i = -1;	
 	while(++i < 4)
 		pthread_create(&phs[i].thread, 0, live_cycle, &phs[i]);
@@ -33,5 +33,5 @@ int	main(int ac, char **av)
 //		phs = phs->next;
 //		sleep(1);
 //	}
-	return (0);
+	return (EXIT_SUCCESS);
 }

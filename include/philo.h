@@ -6,7 +6,7 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 11:29:30 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/03/04 14:57:00 by oezzaou          ###   ########.fr       */
+/*   Updated: 2023/03/05 12:07:16 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # ifndef PHILO_H
@@ -17,22 +17,20 @@
 # include <stdio.h>
 # include <pthread.h>
 # include <sys/time.h>
-# define USAGE "./philo [number_of_philosofers] [time_to_die] [time_to_eat] [time_to_sleep]"
 
-//#############################
-//#          STATUS           #
-//#############################
+//###############################
+//#            MENU             #
+//###############################
+# define USAGE "./philo [number_of_philosofers] [time_to_die] [time_to_eat] [time_to_sleep]"
+# define DEFINITION "Start simulation of dinning philosofer problem\n"
+
+//###############################
+//#            STATUS           #
+//###############################
 # define EAT "eating"
 # define THINK "THINKING"
 # define SLEEP "SLEEPING"
 # define DIE "DIYING"
-
-//typedef struct s_time
-//{
-//	double		time_to_die;
-//	double		time_to_eat;
-//	double		time_to_sleep;
-//}
 
 typedef struct s_philo
 {
@@ -58,6 +56,7 @@ void	*start_thinking(void *philo);
 void	*start_sleeping(void *philo);
 
 	/*********** Utils ***********/
-int	ft_atoi(char *s);
+int		ft_atoi(char *s);
+void	display_usage_menu(void);
 
 #endif
