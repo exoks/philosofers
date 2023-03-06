@@ -6,7 +6,7 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 12:00:48 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/03/05 12:08:17 by oezzaou          ###   ########.fr       */
+/*   Updated: 2023/03/06 11:38:55 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -26,5 +26,5 @@ int	ft_atoi(char *s)
 void	display_usage_menu()
 {
 	printf("NAME : \n%50s\n", DEFINITION);
-	printf("SYNOPSIS : \n%50s\n", USAGE);
+	printf("SYNOPSIS : \n%50s\n\n\n", USAGE);
 }

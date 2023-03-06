@@ -6,7 +6,7 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 11:29:30 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/03/05 12:07:16 by oezzaou          ###   ########.fr       */
+/*   Updated: 2023/03/06 15:52:39 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # ifndef PHILO_H
@@ -32,21 +32,26 @@
 # define SLEEP "SLEEPING"
 # define DIE "DIYING"
 
+typedef struct t_time
+{
+	double		time_to_eat;
+	double		time_to_die;
+	double		time_to_sleep;
+}				t_time;
+
 typedef struct s_philo
 {
 	int				id;
 	int				forks;
-	double			time_to_die;
-	double			time_to_eat;
-	double			time_to_sleep;
+	t_time			*time;
 	void 			*(*actions[3])(void *);
-	int				begin;
+	double			begin;
 	pthread_t		thread;
 	struct s_philo	*next;
 }					t_philo;
 
 	/******** PHILO_INFO *********/
-t_philo	*get_philosofers(int ac, char **av);
+t_philo	*get_philosofers(int ac, char **av, t_time *t);
 
 	/********** ACTIONS **********/
 void	*live_cycle(void *args);
