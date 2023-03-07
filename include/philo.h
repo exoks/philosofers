@@ -6,7 +6,7 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 11:29:30 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/03/06 15:52:39 by oezzaou          ###   ########.fr       */
+/*   Updated: 2023/03/07 19:47:14 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # ifndef PHILO_H
@@ -31,12 +31,19 @@
 # define THINK "THINKING"
 # define SLEEP "SLEEPING"
 # define DIE "DIYING"
+# define FAILURE 1
+# define SUCCESS 0
+# define TO_MS(A, B) (A * 1000) + (B / 1000)
+
+typedef unsigned long long int ullint;
 
 typedef struct t_time
 {
-	double		time_to_eat;
-	double		time_to_die;
-	double		time_to_sleep;
+	ullint			time_to_eat;
+	ullint			time_to_die;
+	ullint			time_to_sleep;
+	struct timeval	val;
+	ullint			reference_time;
 }				t_time;
 
 typedef struct s_philo
@@ -45,13 +52,13 @@ typedef struct s_philo
 	int				forks;
 	t_time			*time;
 	void 			*(*actions[3])(void *);
-	double			begin;
+	ullint			begin;
 	pthread_t		thread;
 	struct s_philo	*next;
 }					t_philo;
 
 	/******** PHILO_INFO *********/
-t_philo	*get_philosofers(int ac, char **av, t_time *t);
+t_philo	*get_philosofers(int ac, char **av);
 
 	/********** ACTIONS **********/
 void	*live_cycle(void *args);
@@ -62,6 +69,7 @@ void	*start_sleeping(void *philo);
 
 	/*********** Utils ***********/
 int		ft_atoi(char *s);
+ullint	get_current_time(ullint	ref_time);
 void	display_usage_menu(void);
 
 #endif
