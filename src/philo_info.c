@@ -6,7 +6,7 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 11:45:59 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/03/07 20:26:55 by oezzaou          ###   ########.fr       */
+/*   Updated: 2023/03/08 11:40:38 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # include "philo.h"
@@ -21,10 +21,12 @@ void	*live_cycle(void *args)
 	if (p->id == 1)
 		p->time->reference_time = get_current_time(0);
 	i = p->id - 1;
-	pthread_mutex_lock(&mutex);
 	while(++i)
+	{
+		pthread_mutex_lock(&mutex);
 		(p->actions)[2 * ((i % 3) == 0) + ((i % 3) == 2)](args);
-	pthread_mutex_unlock(&mutex);
+		pthread_mutex_unlock(&mutex);
+	}
 	return (0);
 }
 
@@ -45,15 +47,15 @@ void	*start_eating(void *philo)
 		p->forks += (p->next->forks)--;
 		printf("%llums %d has taken a fork\n", get_current_time(p->time->reference_time), p->id);
 	}
-	while(get_current_time(p->time->reference_time))
 	if (p->forks == 2)
 	{
 		p->begin = get_current_time(p->time->reference_time);
 		printf("%llums %d is eating\n", p->begin, p->id);
 		usleep(p->time->time_to_eat * 1000);
 		p->forks -= ++(p->next->forks);
+		return (0);
 	}
-	exit(printf("%llums %d did not find forks => ", get_current_time(p->time->reference_time), p->id));
+	printf("philo => %d => did not find a fork\n", p->id);
 	return (0);
 }
 
@@ -63,7 +65,11 @@ void	*start_thinking(void *philo)
 
 	p = (t_philo *) philo;
 	printf("%llums %d is thinking\n", get_current_time(p->time->reference_time), p->id);
-	sleep(3);
+	while (!(p->forks == 1 && p->next->forks == 1))
+	{
+		if (get_current_time(p->time->reference_time) - p->begin > p->time->time_to_die + 10)
+			exit(printf("%lld ms %d dead\n", get_current_time(p->time->reference_time), p->id));
+	}
 	return (0);
 }
 
