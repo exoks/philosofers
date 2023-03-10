@@ -6,14 +6,13 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 11:45:59 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/03/08 11:40:38 by oezzaou          ###   ########.fr       */
+/*   Updated: 2023/03/10 16:28:59 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # include "philo.h"
 
 void	*live_cycle(void *args)
 {
-	pthread_mutex_t	mutex;
 	t_philo			*p;
 	int				i;
 
@@ -23,9 +22,9 @@ void	*live_cycle(void *args)
 	i = p->id - 1;
 	while(++i)
 	{
-		pthread_mutex_lock(&mutex);
-		(p->actions)[2 * ((i % 3) == 0) + ((i % 3) == 2)](args);
-		pthread_mutex_unlock(&mutex);
+//		pthread_mutex_lock(&mutex);
+		(p->actions)[((i % 3) == 2) + 2 * ((i % 3) == 0)](args);
+//		pthread_mutex_unlock(&mutex);
 	}
 	return (0);
 }
@@ -42,6 +41,7 @@ void	*start_eating(void *philo)
 	t_philo 		*p;
 
 	p = (t_philo *) philo;
+//	printf("philo => %d\nfork -> %d\nnext fork -> %d\n", p->id, p->forks, p->next->forks);
 	if (p->next->forks == 1 && p->forks == 1)
 	{
 		p->forks += (p->next->forks)--;
@@ -55,7 +55,7 @@ void	*start_eating(void *philo)
 		p->forks -= ++(p->next->forks);
 		return (0);
 	}
-	printf("philo => %d => did not find a fork\n", p->id);
+//	printf("philo => %d => did not find a fork\n", p->id);
 	return (0);
 }
 

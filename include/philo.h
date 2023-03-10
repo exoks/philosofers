@@ -6,7 +6,7 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 11:29:30 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/03/07 19:47:14 by oezzaou          ###   ########.fr       */
+/*   Updated: 2023/03/09 11:51:43 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # ifndef PHILO_H
@@ -44,6 +44,7 @@ typedef struct t_time
 	ullint			time_to_sleep;
 	struct timeval	val;
 	ullint			reference_time;
+	pthread_mutex_t	*mutex;
 }				t_time;
 
 typedef struct s_philo
