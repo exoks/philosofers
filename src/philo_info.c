@@ -6,7 +6,7 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 11:45:59 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/03/10 16:28:59 by oezzaou          ###   ########.fr       */
+/*   Updated: 2023/03/12 11:59:11 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # include "philo.h"
@@ -20,11 +20,12 @@ void	*live_cycle(void *args)
 	if (p->id == 1)
 		p->time->reference_time = get_current_time(0);
 	i = p->id - 1;
+	pthread_mutex_init(p->mutex, 0);
 	while(++i)
 	{
-//		pthread_mutex_lock(&mutex);
+		pthread_mutex_lock(p->mutex);
 		(p->actions)[((i % 3) == 2) + 2 * ((i % 3) == 0)](args);
-//		pthread_mutex_unlock(&mutex);
+		pthread_mutex_unlock(p->mutex);
 	}
 	return (0);
 }
@@ -41,7 +42,7 @@ void	*start_eating(void *philo)
 	t_philo 		*p;
 
 	p = (t_philo *) philo;
-//	printf("philo => %d\nfork -> %d\nnext fork -> %d\n", p->id, p->forks, p->next->forks);
+	printf("philo => %d\nfork -> %d\nnext fork -> %d\n", p->id, p->forks, p->next->forks);
 	if (p->next->forks == 1 && p->forks == 1)
 	{
 		p->forks += (p->next->forks)--;
@@ -55,7 +56,7 @@ void	*start_eating(void *philo)
 		p->forks -= ++(p->next->forks);
 		return (0);
 	}
-//	printf("philo => %d => did not find a fork\n", p->id);
+	printf("philo => %d => did not find a fork\n", p->id);
 	return (0);
 }
 
@@ -106,6 +107,9 @@ t_philo	*get_philosofers(int ac, char **av)
 	i = -1;
 	while (++i < phs_nb)
 	{
+		phs[i].mutex = malloc(sizeof(pthread_mutex_t));
+		if (!phs[i].mutex)
+			return (0);
 		phs[i].id = i + 1;
 		phs[i].forks = 1;
 		phs[i].time = time;

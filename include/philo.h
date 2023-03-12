@@ -6,7 +6,7 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 11:29:30 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/03/09 11:51:43 by oezzaou          ###   ########.fr       */
+/*   Updated: 2023/03/12 11:50:11 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # ifndef PHILO_H
@@ -55,6 +55,7 @@ typedef struct s_philo
 	void 			*(*actions[3])(void *);
 	ullint			begin;
 	pthread_t		thread;
+	pthread_mutex_t	*mutex;
 	struct s_philo	*next;
 }					t_philo;
 
