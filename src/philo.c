@@ -6,32 +6,19 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 15:13:34 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/03/12 11:57:54 by oezzaou          ###   ########.fr       */
+/*   Updated: 2023/03/13 15:31:35 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # include "philo.h"
 
-pthread_mutex_t		mutex;
-
 int	main(int ac, char **av)
 {
 	t_philo			*phs;
-	int				i;
 	
 	phs = get_philosofers(ac, av);
 	if (!phs)
 		return (display_usage_menu(), EXIT_FAILURE);
-	i = -1;
-	while (++i < 3)
-		pthread_create(&phs[i].thread, 0, live_cycle, &phs[i]);
-	i = -1;
-	while (++i < 3)
-		pthread_join(phs[i].thread, 0);
-//	{
-		//pthread_create(&phs->thread, 0, actions[phs->id - 1], phs);
-//		printf("id => %d\n", phs->id);
-//		phs = phs->next;
-//		sleep(1);
-//	}
+	if (!start_dinning_philos_simulation(phs))
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

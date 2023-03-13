@@ -6,7 +6,7 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 11:29:30 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/03/12 11:50:11 by oezzaou          ###   ########.fr       */
+/*   Updated: 2023/03/13 15:23:02 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # ifndef PHILO_H
@@ -39,13 +39,13 @@ typedef unsigned long long int ullint;
 
 typedef struct t_time
 {
+	ullint			philos_nbr;
 	ullint			time_to_eat;
 	ullint			time_to_die;
 	ullint			time_to_sleep;
-	struct timeval	val;
+	ullint			nbr_time_each_philo_eat;
 	ullint			reference_time;
-	pthread_mutex_t	*mutex;
-}				t_time;
+}					t_time;
 
 typedef struct s_philo
 {
@@ -53,7 +53,7 @@ typedef struct s_philo
 	int				forks;
 	t_time			*time;
 	void 			*(*actions[3])(void *);
-	ullint			begin;
+	ullint			time_of_last_meal;
 	pthread_t		thread;
 	pthread_mutex_t	*mutex;
 	struct s_philo	*next;
@@ -63,6 +63,7 @@ typedef struct s_philo
 t_philo	*get_philosofers(int ac, char **av);
 
 	/********** ACTIONS **********/
+int		start_dinning_philos_simulation(t_philo *phs);
 void	*live_cycle(void *args);
 void	get_actions(void *(*actions[3])(void *));
 void	*start_eating(void *philo);

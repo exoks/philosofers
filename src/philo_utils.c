@@ -6,7 +6,7 @@
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 12:00:48 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/03/07 18:55:58 by oezzaou          ###   ########.fr       */
+/*   Updated: 2023/03/13 17:47:19 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -21,6 +21,16 @@ int	ft_atoi(char *s)
 	while (s[++i] && s[i] >= '0' && s[i] <= '9')
 		nb = nb * 10 + s[i] - '0';
 	return (nb * ((*s != '-') - (*s == '-')));
+}
+
+int	ft_putstr(char *s)
+{
+	int	len;
+
+	len = 0;
+	while(*s)
+		len += write(1, s++, 1);
+	return (len);
 }
 
 ullint	get_current_time(ullint ref_time)

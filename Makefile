@@ -6,7 +6,7 @@
 #    By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/03 15:12:02 by oezzaou           #+#    #+#              #
-#    Updated: 2023/03/10 13:06:54 by oezzaou          ###   ########.fr        #
+#    Updated: 2023/03/13 14:42:10 by oezzaou          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ##################################
@@ -23,7 +23,7 @@ PTHREAD_LIB := pthread
 INCDIR		:= include/
 SRCDIR 		:= src
 OBJDIR 		:= obj
-SRCS 		:= philo philo_info philo_utils
+SRCS 		:= philo philo_process philo_actions philo_utils
 OBJS 		:= $(addprefix $(OBJDIR)/, $(addsuffix .o, $(SRCS)))
 SRCS 		:= $(addprefix $(SRCDIR)/, $(addsuffix .c, $(SRCS)))
 
